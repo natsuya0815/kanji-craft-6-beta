@@ -1,0 +1,1 @@
+# kanji-craft-6-beta
