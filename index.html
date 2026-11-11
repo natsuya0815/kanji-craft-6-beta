@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0b172b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="漢字クラフト6β">
-<title>漢字クラフト 6年生 実験版 | ステージ2 β1</title>
+<title>漢字クラフト 6年生 実験版 | ステージ2 β2</title>
 <style>
 :root{--bg:#0a1425;--panel:#192d49;--line:#405b79;--text:#f0f6ff;--mute:#b4c7de;--gold:#ffcf79;--mint:#75ebc2;--red:#fa8397;--blue:#91bbfb}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 15% 0%,#264568 0,transparent 48%),radial-gradient(ellipse at 100% 30%,#1a3954 0,transparent 40%),var(--bg);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:15px;line-height:1.5}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}[hidden]{display:none!important}
@@ -208,7 +208,7 @@ header{background:#0a1729e8;border-bottom:1px solid #59759177;position:sticky;to
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
-<header><div class="bar"><div class="brand">⚒️ 漢字クラフト6年生 β<small>ステージ1＋新配信ステージ2 · 実験版</small></div><div class="miniTag">独立保存 · 実験版 · 単一HTML</div></div></header>
+<header><div class="bar"><div class="brand">⚒️ 漢字クラフト6年生 β2<small>ステージ1＋新配信ステージ2 · 実験版</small></div><div class="miniTag">独立保存 · 実験版 · 単一HTML</div></div></header>
 <main>
 <section class="screen on" id="home">
  <div class="box hero"><div class="eyebrow">KANJI CRAFT / GRADE 6 BETA</div><h1>漢字の世界を、<br><span class="accent">新ステージ</span>を攻略。</h1><p>ステージ1はこれまでの30字。ステージ2は新しい30字に複数の読み方と復習問題を追加。部品は完成済み「1026アプリ」と同じ形です。通常問題は正答率で100円満点、当日の最高額のみ加算。ボスはシールド→反撃→熟語2字の最終決戦！ 実験版の記録は現行アプリと完全に分離します。</p><div class="row"><button class="btn" id="resumeBtn" type="button">▶ 選んだステージを開始</button><button class="btn alt" id="goStatsBtn" type="button">📊 学習統計</button><button class="btn alt" id="goChallengeBtn" type="button">🎯 苦手チャレンジ</button></div></div>
@@ -695,7 +695,7 @@ const PRODUCT_CUES = {
   "灰": "【はい】色", "拡": "【かく】大", "革": "【かく】命", "閣": "内【かく】", "割": "【わり】合",
   "株": "【かぶ】式会社", "干": "【ほ】す", "巻": "【ま】き物", "看": "【かん】板", "簡": "【かん】単",
   "危": "【あぶ】ない", "机": "【つくえ】に向かう", "揮": "指【き】", "貴": "【き】重", "疑": "【うたが】う",
-  "吸": "【す】いこむ", "供": "子【ども】", "胸": "【むね】を張る", "郷": "故【きょう】", "勤": "【つと】め先",
+  "吸": "【す】いこむ", "供": "子【ども】", "胸": "【むね】を張る", "郷": "【きょう】土", "勤": "【つと】め先",
   // 6年・第2ステージ
   "筋": "【きん】肉", "系": "【けい】列", "敬": "【けい】語", "警": "【けい】察", "劇": "【げき】場",
   "激": "【はげ】しい", "穴": "落とし【あな】", "券": "入場【けん】", "絹": "【きぬ】糸", "権": "【けん】利",
@@ -760,12 +760,13 @@ for(const [ch,cs] of Object.entries({"幼":["【おさな】い子","【よう�
 
 /* BETA: One different learning question for each adopted standard reading. */
 const BETA_STAGE1_CUES={"忘":"【わす】れ物","忠":"【ちゅう】告","恩":"【おん】返し","訪":"【ほう】問","認":"確【にん】","誕":"【たん】生日","著":"【ちょ】者","諸":"【しょ】国","署":"消防【しょ】","洗":"【あら】う","染":"【そ】める","源":"水【げん】","閉":"【し】める","閣":"内【かく】","簡":"【かん】単","胸":"【むね】","腹":"空【ふく】","肺":"【はい】活量","裏":"【うら】側","装":"服【そう】","補":"【ほ】助","誤":"【ご】認","論":"【ろん】理","警":"【けい】察","刻":"時【こく】","割":"【わり】合","創":"【そう】作","暖":"【だん】房","晩":"今【ばん】","映":"【えい】画"};
-const BETA_STAGE2_CUES={"胃":["【い】の調子が悪い"],"異":["【こと】なる意見","【い】常な音"],"遺":["【い】跡を調べる"],"域":["地【いき】を調べる"],"宇":["【う】宙飛行士"],"延":["試合を【えん】長する","会議が【の】びる"],"沿":["川に【そ】って歩く","【えん】岸を進む"],"我":["【われ】らの学校","【が】慢して待つ"],"灰":["木が燃えて【はい】になる"],"拡":["写真を【かく】大する"],"革":["【かわ】のベルト","改【かく】を進める"],"株":["木の【かぶ】を切る"],"干":["洗濯物を【ほ】す","口出しして【かん】渉する"],"巻":["ひもを【ま】く","本の第1【かん】"],"看":["【かん】護師の仕事"],"危":["【あぶ】ない場所","【き】険な道"],"机":["【つくえ】を並べる","【き】上の計画"],"揮":["指【き】をとる"],"貴":["【とうと】い命","【き】重な品"],"疑":["本当か【うたが】う","【ぎ】問を持つ"],"吸":["空気を【す】う","【きゅう】収する"],"供":["花を【そな】える","【きょう】給する"],"郷":["故【きょう】に帰る"],"勤":["毎日【つと】める","【きん】務時間"],"筋":["話の【すじ】が通る","【きん】肉を動かす"],"系":["理【けい】の授業"],"敬":["人を【うやま】う","尊【けい】する"],"劇":["演【げき】を見る"],"激":["【はげ】しい雨","【げき】流に注意"],"穴":["地面に【あな】を掘る"]};
+const BETA_STAGE2_CUES={"胃":["【い】の調子が悪い"],"異":["【こと】なる意見","【い】常な音"],"遺":["【い】跡を調べる"],"域":["地【いき】を調べる"],"宇":["【う】宙飛行士"],"延":["試合を【えん】長する","会議が【の】びる"],"沿":["川に【そ】って歩く","【えん】岸を進む"],"我":["【われ】らの学校","【が】慢して待つ"],"灰":["木が燃えて【はい】になる"],"拡":["写真を【かく】大する"],"革":["【かわ】のベルト","改【かく】を進める"],"株":["木の【かぶ】を切る"],"干":["洗濯物を【ほ】す","口出しして【かん】渉する"],"巻":["ひもを【ま】く","本の第1【かん】"],"看":["【かん】護師の仕事"],"危":["【あぶ】ない場所","【き】険な道"],"机":["【つくえ】を並べる","【き】上の計画"],"揮":["指【き】をとる"],"貴":["【とうと】い命","【き】重な品"],"疑":["本当か【うたが】う","【ぎ】問を持つ"],"吸":["空気を【す】う","【きゅう】収する"],"供":["花を【そな】える","【きょう】給する"],"郷":["【きょう】土"],"勤":["毎日【つと】める","【きん】務時間"],"筋":["話の【すじ】が通る","【きん】肉を動かす"],"系":["理【けい】の授業"],"敬":["人を【うやま】う","尊【けい】する"],"劇":["演【げき】を見る"],"激":["【はげ】しい雨","【げき】流に注意"],"穴":["地面に【あな】を掘る"]};
 const BETA_BOSS_PAIRS=[
  {word:'誤認',per:['ご','にん'],meaning:'誤って別のものと認めること',stage:1},
+ {word:'異国',per:['い','こく'],meaning:'自分の国とは異なる国',stage:2},
+ {word:'郷土',per:['きょう','ど'],meaning:'生まれ育った土地',stage:2},
  {word:'異論',per:['い','ろん'],meaning:'異なる意見',stage:2},
- {word:'腹筋',per:['ふっ','きん'],meaning:'おなかの筋肉',stage:2},
- {word:'異郷',per:['い','きょう'],meaning:'生まれ育った土地と違う場所',stage:2}
+ {word:'腹筋',per:['ふっ','きん'],meaning:'おなかの筋肉',stage:2}
 ];
 function betaNewProblems(stage){
  const map=stage.id===1?Object.fromEntries(Object.entries(BETA_STAGE1_CUES).map(([k,cue])=>[k,[cue]])):BETA_STAGE2_CUES;
@@ -1260,16 +1261,20 @@ function componentMarkup(q){
   const glyph=componentGlyph(value,layout,i);
   if(value==='口'||value==='品')return `<foreignObject x="${x}" y="${y}" width="${w}" height="${h}"><div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">${v24PartIcon(value)}</div></foreignObject>`;
   // A verified cropped glyph is the visual part (not the part label) for grouped stage-2 components.
-  if(STAGE2_VISUAL_PARTS[glyph])return stage2PartSVG(glyph,`x="${x+1}" y="${y+1}" width="${w-2}" height="${h-2}" style="color:#ffffff"`);
-  // Glyph stays at a natural stroke height; scale only its advance width to its semantic region.
-  // Using clip rectangles or drawing an oversized character would cut off the radical.
+  if(STAGE2_VISUAL_PARTS[glyph])return stage2PartSVG(glyph,`x="${x+1}" y="${y+1}" width="${w-2}" height="${h-2}" style="color:#ffffff;overflow:hidden"`);
+  // Beta 2: each selected part fits its own semantic region in BOTH axes.
+  // Side radicals may be narrower than normal, but vertical overhang must never
+  // spill into an adjacent region (particularly TB, R2 and four-part layouts).
   const vertical=['LR','LR3','Q4','L3R','L2R','L2M2','R2','WEAVE2'].includes(layout);
   const frame=((layout==='ENC'||layout==='ENC3')&&i===0)||(layout==='E3'&&i===1);
   const fs=layout==='ENC3V'?(i===0?70:i===1?47:56):layout==='WEAVE2'?67:vertical?79:frame?87:Math.min(50,h*1.2);
-  const sx=Math.min(1.0,(w*.99)/(fs*.99));
+  const fitX=Math.min(1,(w-5)/(fs*.94));
+  const fitY=Math.min(1,(h-5)/(fs*.99));
+  const clipId=`beta2-part-${i}`;
+  const clip=`<clipPath id="${clipId}"><rect x="${x+1}" y="${y+1}" width="${w-2}" height="${h-2}" rx="2"/></clipPath>`;
   const tile=layout==='ENC3V'||layout==='WEAVE2'
    ? `<rect x="${x+1}" y="${y+1}" width="${w-2}" height="${h-2}" rx="5" fill="rgba(255,255,255,0.05)" stroke="#7397ad" stroke-width="0.65"/>` : '';
-  return `${tile}<g transform="translate(${tx} ${ty}) scale(${sx.toFixed(3)} 1)"><text class="radicalStroke" text-anchor="middle" dominant-baseline="central" x="0" y="0" font-size="${fs.toFixed(1)}" fill="#ffffff" font-weight="720">${glyph}</text></g>`;
+  return `${clip}${tile}<g clip-path="url(#${clipId})"><g transform="translate(${tx} ${ty}) scale(${fitX.toFixed(3)} ${fitY.toFixed(3)})"><text class="radicalStroke" text-anchor="middle" dominant-baseline="central" x="0" y="0" font-size="${fs.toFixed(1)}" fill="#ffffff" font-weight="720">${glyph}</text></g></g>`;
  }).join('');
  return `<div class="componentCanvas" role="img" aria-label="${count}個の部品から漢字を組み立てる"><svg viewBox="0 0 100 100">${pieces}</svg></div>`;
 }
