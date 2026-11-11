@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0b172b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="漢字クラフト6β">
-<title>漢字クラフト 6年生 実験版 | ステージ2 β2</title>
+<title>漢字クラフト 6年生 実験版 | ステージ2 β3</title>
 <style>
 :root{--bg:#0a1425;--panel:#192d49;--line:#405b79;--text:#f0f6ff;--mute:#b4c7de;--gold:#ffcf79;--mint:#75ebc2;--red:#fa8397;--blue:#91bbfb}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 15% 0%,#264568 0,transparent 48%),radial-gradient(ellipse at 100% 30%,#1a3954 0,transparent 40%),var(--bg);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:15px;line-height:1.5}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}[hidden]{display:none!important}
@@ -202,13 +202,17 @@ header{background:#0a1729e8;border-bottom:1px solid #59759177;position:sticky;to
 .s4grid.s4-u5 .s4glyph,.s4grid.s4-v4 .s4glyph{font-size:clamp(20px,5.6vw,34px)}
 .s4grid.s4-v4{grid-template-columns:1fr;grid-template-rows:24% 25% 26% 25%}
 .s4slot .s4glyph img[src^="data:image/svg+xml"]{width:100%;height:100%;max-width:56px;max-height:56px;object-fit:contain}
+
+/* β3: offer the original safe exit action below the choices, even after scrolling. */
+.gameExitRow{display:flex;justify-content:flex-end;align-items:center;margin:8px 0 4px}
+.gameExitBottom{color:#ffe5e8!important;background:#4b2c42!important;border-color:#bd8497!important;min-height:44px!important}
 </style>
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
-<header><div class="bar"><div class="brand">⚒️ 漢字クラフト6年生 β2<small>ステージ1＋新配信ステージ2 · 実験版</small></div><div class="miniTag">独立保存 · 実験版 · 単一HTML</div></div></header>
+<header><div class="bar"><div class="brand">⚒️ 漢字クラフト6年生 β3<small>ステージ1＋新配信ステージ2 · 実験版</small></div><div class="miniTag">独立保存 · 実験版 · 単一HTML</div></div></header>
 <main>
 <section class="screen on" id="home">
  <div class="box hero"><div class="eyebrow">KANJI CRAFT / GRADE 6 BETA</div><h1>漢字の世界を、<br><span class="accent">新ステージ</span>を攻略。</h1><p>ステージ1はこれまでの30字。ステージ2は新しい30字に複数の読み方と復習問題を追加。部品は完成済み「1026アプリ」と同じ形です。通常問題は正答率で100円満点、当日の最高額のみ加算。ボスはシールド→反撃→熟語2字の最終決戦！ 実験版の記録は現行アプリと完全に分離します。</p><div class="row"><button class="btn" id="resumeBtn" type="button">▶ 選んだステージを開始</button><button class="btn alt" id="goStatsBtn" type="button">📊 学習統計</button><button class="btn alt" id="goChallengeBtn" type="button">🎯 苦手チャレンジ</button></div></div>
@@ -231,7 +235,7 @@ header{background:#0a1729e8;border-bottom:1px solid #59759177;position:sticky;to
  <div class="gameShell"><div class="box hud"><span><small class="sub">ライフ</small><br><strong class="life" id="lifeHud">❤️❤️❤️</strong></span><span><small class="sub">クリア進捗</small><br><b id="doneHud">0 / 30</b></span><span><small class="sub">ゲーム得点</small><br><b id="scoreHud" style="color:var(--mint)">0点</b></span><span><small class="sub">学習報酬</small><br><b id="coinHud" style="color:var(--gold)">0円</b></span><button class="btn alt small" id="exitGameBtn" type="button">✕ 終了</button></div>
  <div class="bossHud" id="bossHud" hidden><div class="bossHudTitle"><strong>👹 3段階ボス戦</strong><span id="bossRemainHud">残り3問</span></div><div class="bossRail"><div id="bossFill"></div></div><small>シールド → 反撃 → 二字熟語2文字！</small></div>
   <div class="box timer" id="timerBox"><div class="timertop"><span class="sub" id="modeHud">ふつう</span><strong id="clockHud">15.0秒</strong></div><div class="rail"><div id="timeFill"></div></div></div>
- <div class="box quest"><div class="questType" id="questionType">🧩 漢字の部品を組み立てよう</div><div class="cue" id="questionCue">出題中</div><div class="promptView" id="promptView"><div class="target" id="targetView">—</div></div><div class="caption" id="questionCaption"></div><div class="slotRow" id="slotsView"></div><div class="bank" id="bank"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="gameBtns"><button class="btn alt small" id="resetPartsBtn" type="button">↺ 選択をやり直す</button><span class="smallMuted" id="streakHud">5連続正解でHP+1</span></div><div class="challengeNotice" id="challengeHud" hidden></div><div class="curtain" id="previewCurtain" hidden><div><b id="previewCaption">覚えて！</b><strong id="previewGlyph">森</strong><small>少ししたら問題が始まります</small></div></div></div>
+ <div class="box quest"><div class="questType" id="questionType">🧩 漢字の部品を組み立てよう</div><div class="cue" id="questionCue">出題中</div><div class="promptView" id="promptView"><div class="target" id="targetView">—</div></div><div class="caption" id="questionCaption"></div><div class="slotRow" id="slotsView"></div><div class="bank" id="bank"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="gameBtns"><button class="btn alt small" id="resetPartsBtn" type="button">↺ 選択をやり直す</button><span class="smallMuted" id="streakHud">5連続正解でHP+1</span></div><div class="gameExitRow"><button class="btn alt small gameExitBottom" id="exitGameBottomBtn" type="button" aria-label="ゲームを終了してステージ選択へ戻る">✕ 終了してステージ選択へ</button></div><div class="challengeNotice" id="challengeHud" hidden></div><div class="curtain" id="previewCurtain" hidden><div><b id="previewCaption">覚えて！</b><strong id="previewGlyph">森</strong><small>少ししたら問題が始まります</small></div></div></div>
  </div>
 </section>
 <section class="screen" id="result"><div class="box result"><div class="confetti" id="confetti"></div><div class="topLayer"><span class="resultIcon" id="resultIcon">🏆</span><div class="eyebrow" id="resultEyebrow">STAGE CLEAR</div><h1 id="resultTitle">おめでとう！</h1><p id="resultMessage"></p><div class="money" id="resultMoney">100円</div><div class="resultStars" id="resultStars">★★★★★</div><p id="resultScore" class="sub">ゲーム得点：0点</p><div class="row" style="justify-content:center;margin-top:18px"><button class="btn" id="resultHomeBtn" type="button">ステージ選択へ</button><button class="btn alt" id="resultRetryBtn" type="button">もう一度プレイ</button></div></div></div></section>
@@ -1463,7 +1467,7 @@ function openStagePdf(id){
   setTimeout(()=>URL.revokeObjectURL(url),300000);
  }catch(err){if(win)win.close();console.error(err);alert('PDFの表示に失敗しました。Safariで開いてください。')}
 }
-$('resumeBtn').onclick=()=>startGame();$('startStageBtn').onclick=()=>startGame();$('goChallengeBtn').onclick=()=>startGame('challenge');$('goStatsBtn').onclick=renderStats;$('printBtn').onclick=()=>openStagePdf(db.selected);$('statsBackBtn').onclick=renderHome;$('statsFilter').onchange=renderStats;$('statsGrade').onchange=renderStats;$('resultHomeBtn').onclick=renderHome;$('exitGameBtn').onclick=()=>{if(confirm('途中でやめますか？ 現在の正解数までのおこづかいは記録されています。')){timersOff();run=null;renderHome()}};
+$('resumeBtn').onclick=()=>startGame();$('startStageBtn').onclick=()=>startGame();$('goChallengeBtn').onclick=()=>startGame('challenge');$('goStatsBtn').onclick=renderStats;$('printBtn').onclick=()=>openStagePdf(db.selected);$('statsBackBtn').onclick=renderHome;$('statsFilter').onchange=renderStats;$('statsGrade').onchange=renderStats;$('resultHomeBtn').onclick=renderHome;const finishGameEarly=()=>{if(confirm('途中でやめますか？ 現在の正解数までのおこづかいは記録されています。')){timersOff();run=null;renderHome()}};$('exitGameBtn').onclick=finishGameEarly;$('exitGameBottomBtn').onclick=finishGameEarly;
 $('saveBtn').onclick=()=>{const obj={name:'kanji-craft-6-beta',savedAt:new Date().toISOString(),db};const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='kanji-craft-6-beta-backup-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 $('loadBtn').onclick=()=>$('loadFile').click();$('loadFile').onchange=async ev=>{const f=ev.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(x.name!=='kanji-craft-6-beta'||!x.db||typeof x.db!=='object')throw Error('形式が違います');if(!confirm('保存済みの記録を読み込みますか？ 現在の記録は上書きされます。'))return;db=x.db;normalizeDB();persist();renderHome();alert('学習記録を読み込みました。')}catch(e){alert('読み込みに失敗しました：'+e.message)}finally{ev.target.value=''}};
 // Prevent unwanted double-tap zoom on game controls, while keeping pinch zoom available.
